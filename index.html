@@ -3,25 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Griha Pravesh Invitation</title>
-    <!-- Google Fonts for elegant typography -->
+    <title>Griha Pravesh Invitation | Housewarming Ceremony</title>
+    
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
     <style>
         :root {
-            --purple-primary: #5A2B68;
-            --purple-medium: #7B4B8A;
-            --purple-light: #9D6BB0;
-            --lavender-soft: #D5C2E2;
-            --gold-primary: #C5A059;
-            --gold-gradient: linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%);
-            --stone-base: #EDE6DD;
-            --stone-shadow: #D1C5B7;
-            --cream-bg: #FAF7F2;
-            --text-dark: #4A2E4B;
-            --leaf-green: #526E5B;
+            --bg-cream: #FFF8EE;
+            --bg-accent: #FFF0DB;
+            --primary-magenta: #9E0043;
+            --deep-magenta: #70002F;
+            --gold-accent: #D4AF37;
+            --gold-light: #F3E5AB;
+            --lotus-pink: #FF80AB;
+            --lotus-soft: #F8BBD0;
+            --stem-green: #4CAF50;
+            --text-dark: #330015;
+            --shadow: 0 15px 35px rgba(158, 0, 67, 0.15);
         }
 
         * {
@@ -31,411 +32,750 @@
         }
 
         body {
-            background-color: #2D232E;
+            background-color: #2D0014;
+            font-family: 'Montserrat', sans-serif;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
             padding: 20px;
-            font-family: 'Cormorant Garamond', serif;
-        }
-
-        /* Outer Invitation Card Frame */
-        .card-container {
+            overflow-x: hidden;
             position: relative;
-            width: 100%;
-            max-width: 540px;
-            background: var(--cream-bg);
-            border-radius: 4px;
-            padding: 12px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-            /* Gold Frame Outer Border */
-            background-image: var(--gold-gradient);
         }
 
-        .card-inner {
-            position: relative;
-            background: #FFFFFF;
-            background-image: radial-gradient(#F3EEE7 1px, transparent 1px), radial-gradient(#F3EEE7 1px, #FAF7F2 1px);
-            background-size: 20px 20px;
-            background-position: 0 0, 10px 10px;
-            border: 2px solid rgba(197, 160, 89, 0.4);
-            padding: 45px 30px 40px 30px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            overflow: hidden;
-            min-height: 760px;
-        }
-
-        /* Classical Stone Arch & Columns Background Layer */
-        .arch-columns-bg {
-            position: absolute;
+        /* Canvas for Floating Lotus Petals Animation */
+        #petal-canvas {
+            position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            width: 100vw;
+            height: 100vh;
             pointer-events: none;
-            z-index: 1;
+            z-index: 10;
         }
 
-        /* Top Hanging Wisteria Garland Layer */
-        .wisteria-garland {
-            position: absolute;
-            top: -5px;
-            left: 0;
+        /* Main Invitation Card Container */
+        .card-container {
+            background-color: var(--bg-cream);
             width: 100%;
-            height: 180px;
-            pointer-events: none;
-            z-index: 3;
-        }
-
-        /* Bottom Floral Accents Layer */
-        .bottom-florals {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 190px;
-            pointer-events: none;
-            z-index: 3;
-        }
-
-        /* Main Content Container */
-        .content {
+            max-width: 650px;
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(212, 175, 55, 0.3);
             position: relative;
             z-index: 2;
+            animation: cardAppear 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* Outer & Inner Frame Borders */
+        .card-frame {
+            border: 4px solid var(--primary-magenta);
+            border-radius: 8px;
+            padding: 35px 25px 40px 25px;
+            position: relative;
+            background: radial-gradient(circle at center, var(--bg-cream) 60%, var(--bg-accent) 100%);
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .card-frame::before {
+            content: '';
+            position: absolute;
+            top: 6px; left: 6px; right: 6px; bottom: 6px;
+            border: 1.5px solid var(--gold-accent);
+            border-radius: 4px;
+            pointer-events: none;
+        }
+
+        /* Background Floral Watermark Pattern */
+        .bg-watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 110%;
+            height: 110%;
+            opacity: 0.06;
+            background-image: radial-gradient(var(--primary-magenta) 1px, transparent 0);
+            background-size: 24px 24px;
+            pointer-events: none;
+        }
+
+        .flower-pattern-svg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(1.3);
+            opacity: 0.07;
             width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 55px;
+            pointer-events: none;
         }
 
-        /* Arched Invitation Header */
-        .invitation-for {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 13px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--purple-medium);
+        /* Om Symbol Header */
+        .om-container {
             margin-bottom: 12px;
-            font-weight: 500;
+            position: relative;
+            display: inline-block;
+            animation: pulseGlow 3s infinite ease-in-out;
         }
 
-        /* Lord Ganesha Icon */
-        .ganesha-icon {
-            width: 70px;
-            height: 75px;
-            margin: 8px 0 16px 0;
-            fill: var(--purple-primary);
-            filter: drop-shadow(0px 2px 3px rgba(123, 75, 138, 0.2));
-        }
-
-        /* Main Title - Griha Pravesh */
-        .title-main {
-            font-family: 'Alex Brush', cursive;
-            font-size: 58px;
-            color: var(--purple-primary);
-            line-height: 1.1;
-            margin-bottom: 4px;
-            text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.8);
-        }
-
-        /* Subtitle */
-        .subtitle {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 20px;
-            font-style: italic;
-            color: #7A6B7C;
-            letter-spacing: 1px;
-            margin-bottom: 28px;
-        }
-
-        /* Date Section */
-        .event-date {
+        .om-symbol {
+            font-size: 52px;
+            color: var(--primary-magenta);
             font-family: 'Cinzel', serif;
-            font-size: 26px;
-            font-weight: 600;
-            color: var(--purple-primary);
+            font-weight: 700;
+            line-height: 1;
+            text-shadow: 0 2px 10px rgba(158, 0, 67, 0.2);
+        }
+
+        /* Typography Styles */
+        .invited-text {
+            font-family: 'Great Vibes', cursive;
+            font-size: 28px;
+            color: var(--primary-magenta);
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .main-heading {
+            font-family: 'Cinzel', serif;
+            font-size: 34px;
+            font-weight: 800;
+            color: var(--primary-magenta);
             letter-spacing: 2px;
+            line-height: 1.25;
             margin-bottom: 6px;
             text-transform: uppercase;
         }
 
-        /* Day & Time */
-        .event-time {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 21px;
-            font-weight: 500;
-            color: var(--purple-medium);
-            margin-bottom: 24px;
+        .sub-heading {
+            font-family: 'Cinzel', serif;
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--primary-magenta);
+            letter-spacing: 1.5px;
+            margin-bottom: 14px;
         }
 
-        /* Separator Line */
-        .divider {
-            width: 80px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
-            margin: 10px 0 20px 0;
-        }
-
-        /* Location & RSVP */
-        .event-location {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 13px;
-            color: var(--text-dark);
-            line-height: 1.7;
-            letter-spacing: 0.8px;
+        .home-text {
+            font-family: 'Great Vibes', cursive;
+            font-size: 26px;
+            color: var(--primary-magenta);
             margin-bottom: 18px;
+        }
+
+        /* Gold Divider Line */
+        .divider-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin: 15px auto 22px auto;
             max-width: 80%;
         }
 
-        .rsvp {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 17px;
-            font-weight: 600;
-            color: var(--purple-primary);
-            letter-spacing: 1.5px;
-            margin-top: 5px;
+        .divider-line {
+            height: 1.5px;
+            flex: 1;
+            background: linear-gradient(to right, transparent, var(--primary-magenta), transparent);
         }
 
-        /* Responsive Adjustments */
-        @media (max-width: 480px) {
-            .card-inner {
-                padding: 35px 20px;
-                min-height: 680px;
-            }
-            .title-main {
-                font-size: 46px;
-            }
-            .event-date {
-                font-size: 22px;
-            }
-            .content {
-                margin-top: 45px;
-            }
+        .divider-diamond {
+            width: 10px;
+            height: 10px;
+            background-color: var(--primary-magenta);
+            transform: rotate(45deg);
+            border: 1px solid var(--gold-accent);
+        }
+
+        /* Date Section Badge */
+        .date-section {
+            margin: 20px 0;
+            display: inline-block;
+            width: 100%;
+            max-width: 480px;
+        }
+
+        .month-header {
+            font-family: 'Cinzel', serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary-magenta);
+            letter-spacing: 6px;
+            margin-bottom: 8px;
+        }
+
+        .date-grid {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            border-top: 1.5px solid var(--primary-magenta);
+            border-bottom: 1.5px solid var(--primary-magenta);
+            padding: 10px 0;
+            margin: 0 auto;
+        }
+
+        .day-name, .time-text {
+            font-family: 'Cinzel', serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary-magenta);
+            letter-spacing: 2px;
+            flex: 1;
+        }
+
+        .day-name { text-align: right; }
+        .time-text { text-align: left; }
+
+        .date-number {
+            font-family: 'Cinzel', serif;
+            font-size: 54px;
+            font-weight: 800;
+            color: var(--primary-magenta);
+            line-height: 0.9;
+            padding: 0 15px;
+            border-left: 1px solid rgba(158, 0, 67, 0.3);
+            border-right: 1px solid rgba(158, 0, 67, 0.3);
+        }
+
+        .year-text {
+            font-family: 'Cinzel', serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--primary-magenta);
+            letter-spacing: 8px;
+            margin-top: 8px;
+        }
+
+        .at-text {
+            font-family: 'Great Vibes', cursive;
+            font-size: 26px;
+            color: var(--primary-magenta);
+            margin: 15px 0 8px 0;
+        }
+
+        /* Venue Address */
+        .address-box {
+            font-family: 'Cinzel', serif;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--primary-magenta);
+            letter-spacing: 1px;
+            line-height: 1.6;
+            margin-bottom: 22px;
+            padding: 0 20px;
+        }
+
+        /* Countdown Timer */
+        .countdown-title {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--primary-magenta);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .count-box {
+            background: rgba(158, 0, 67, 0.05);
+            border: 1px solid rgba(158, 0, 67, 0.2);
+            border-radius: 6px;
+            padding: 8px 12px;
+            min-width: 65px;
+        }
+
+        .count-number {
+            font-family: 'Cinzel', serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary-magenta);
+        }
+
+        .count-label {
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-dark);
+            opacity: 0.8;
+            margin-top: 2px;
+        }
+
+        /* RSVP & Action Buttons */
+        .rsvp-section {
+            font-family: 'Cinzel', serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--primary-magenta);
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 5;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 5;
+        }
+
+        .btn {
+            background-color: var(--primary-magenta);
+            color: #FFF;
+            border: 1px solid var(--gold-accent);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(158, 0, 67, 0.25);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background-color: var(--deep-magenta);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(158, 0, 67, 0.35);
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, #D4AF37 0%, #AA7C11 100%);
+            color: #FFF;
+            border: 1px solid #FFF8EE;
+        }
+
+        .btn-gold:hover {
+            background: linear-gradient(135deg, #E5C158 0%, #C2921C 100%);
+        }
+
+        /* SVG Lotus Corner Illustrations */
+        .lotus-corner {
+            position: absolute;
+            bottom: -10px;
+            width: 170px;
+            height: auto;
+            pointer-events: none;
+            z-index: 3;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+            transition: transform 0.5s ease;
+        }
+
+        .lotus-left {
+            left: -15px;
+            animation: swayLeft 6s ease-in-out infinite alternate;
+        }
+
+        .lotus-right {
+            right: -15px;
+            transform: scaleX(-1);
+            animation: swayRight 6s ease-in-out infinite alternate;
+        }
+
+        /* Modal Popup for RSVP */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-content {
+            background-color: var(--bg-cream);
+            border: 2px solid var(--primary-magenta);
+            border-radius: 12px;
+            max-width: 450px;
+            width: 100%;
+            padding: 25px;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            animation: modalSlide 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 12px; right: 15px;
+            font-size: 22px;
+            color: var(--primary-magenta);
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--primary-magenta);
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid rgba(158, 0, 67, 0.3);
+            border-radius: 6px;
+            background-color: #FFF;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            color: var(--text-dark);
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-magenta);
+            box-shadow: 0 0 0 2px rgba(158, 0, 67, 0.15);
+        }
+
+        /* Animations */
+        @keyframes cardAppear {
+            0% { opacity: 0; transform: translateY(40px) scale(0.96); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 2px rgba(212, 175, 55, 0.4)); }
+            50% { transform: scale(1.05); filter: drop-shadow(0 0 10px rgba(158, 0, 67, 0.5)); }
+        }
+
+        @keyframes swayLeft {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(3deg); }
+        }
+
+        @keyframes swayRight {
+            0% { transform: scaleX(-1) rotate(0deg); }
+            100% { transform: scaleX(-1) rotate(3deg); }
+        }
+
+        @keyframes modalSlide {
+            0% { opacity: 0; transform: translateY(-30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Layout Adjustments */
+        @media (max-width: 520px) {
+            .card-frame { padding: 25px 15px 35px 15px; }
+            .main-heading { font-size: 26px; }
+            .sub-heading { font-size: 22px; }
+            .invited-text, .home-text, .at-text { font-size: 22px; }
+            .date-number { font-size: 42px; }
+            .day-name, .time-text { font-size: 14px; }
+            .address-box { font-size: 13px; padding: 0 5px; }
+            .lotus-corner { width: 120px; }
+            .count-box { min-width: 50px; padding: 6px 8px; }
+            .count-number { font-size: 16px; }
         }
     </style>
 </head>
 <body>
 
+    <!-- Particle Canvas for Falling Lotus Petals -->
+    <canvas id="petal-canvas"></canvas>
+
+    <!-- Main Card Container -->
     <div class="card-container">
-        <div class="card-inner">
-
-            <!-- Background Architectural Arch & Ionic Columns SVG -->
-            <svg class="arch-columns-bg" viewBox="0 0 500 750" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <linearGradient id="stoneGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stop-color="#E5DCD2"/>
-                        <stop offset="30%" stop-color="#F7F3EE"/>
-                        <stop offset="70%" stop-color="#E2D7CB"/>
-                        <stop offset="100%" stop-color="#D1C3B3"/>
-                    </linearGradient>
-                    <linearGradient id="archGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" stop-color="#E8DDD0"/>
-                        <stop offset="100%" stop-color="#FAF7F2"/>
-                    </linearGradient>
-                </defs>
-
-                <!-- Left Column Base & Shaft -->
-                <rect x="25" y="140" width="45" height="580" fill="url(#stoneGrad)" rx="2"/>
-                <!-- Fluting lines on Left Column -->
-                <line x1="33" y1="180" x2="33" y2="700" stroke="#C3B4A3" stroke-width="2" stroke-dasharray="8 4"/>
-                <line x1="47" y1="180" x2="47" y2="700" stroke="#FFFFFF" stroke-width="2"/>
-                <line x1="61" y1="180" x2="61" y2="700" stroke="#C3B4A3" stroke-width="2" stroke-dasharray="8 4"/>
-                <!-- Left Capital Scrolls -->
-                <path d="M 15 140 Q 20 120 47 125 Q 75 120 80 140 Z" fill="#D9CBB9" stroke="#BBAA96"/>
-                <circle cx="23" cy="133" r="7" fill="#CBBBA7"/>
-                <circle cx="72" cy="133" r="7" fill="#CBBBA7"/>
-
-                <!-- Right Column Base & Shaft -->
-                <rect x="430" y="140" width="45" height="580" fill="url(#stoneGrad)" rx="2"/>
-                <!-- Fluting lines on Right Column -->
-                <line x1="438" y1="180" x2="438" y2="700" stroke="#C3B4A3" stroke-width="2" stroke-dasharray="8 4"/>
-                <line x1="452" y1="180" x2="452" y2="700" stroke="#FFFFFF" stroke-width="2"/>
-                <line x1="466" y1="180" x2="466" y2="700" stroke="#C3B4A3" stroke-width="2" stroke-dasharray="8 4"/>
-                <!-- Right Capital Scrolls -->
-                <path d="M 420 140 Q 425 120 452 125 Q 480 120 485 140 Z" fill="#D9CBB9" stroke="#BBAA96"/>
-                <circle cx="428" cy="133" r="7" fill="#CBBBA7"/>
-                <circle cx="477" cy="133" r="7" fill="#CBBBA7"/>
-
-                <!-- Grand Top Archway -->
-                <path d="M 25 140 A 225 160 0 0 1 475 140" fill="none" stroke="url(#stoneGrad)" stroke-width="28"/>
-                <path d="M 39 140 A 211 146 0 0 1 461 140" fill="none" stroke="#FAF7F2" stroke-width="4"/>
-                <path d="M 11 126 A 239 174 0 0 1 489 126" fill="none" stroke="#C2B29F" stroke-width="3"/>
+        <div class="card-frame">
+            
+            <!-- Watermark Pattern -->
+            <div class="bg-watermark"></div>
+            <svg class="flower-pattern-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#9E0043" d="M100,15 C105,40 120,55 145,60 C120,65 105,80 100,105 C95,80 80,65 55,60 C80,55 95,40 100,15 Z"/>
+                <circle cx="100" cy="60" r="40" fill="none" stroke="#9E0043" stroke-width="1"/>
             </svg>
 
-            <!-- Hanging Wisteria Floral Garland SVG (Top) -->
-            <svg class="wisteria-garland" viewBox="0 0 500 180" xmlns="http://www.w3.org/2000/svg">
-                <g opacity="0.95">
-                    <!-- Vine Stems & Leaves -->
-                    <path d="M 0 10 Q 120 30 250 15 Q 380 30 500 5" fill="none" stroke="#3D5A45" stroke-width="4"/>
-                    <path d="M 30 15 Q 150 45 270 25 T 480 20" fill="none" stroke="#526E5B" stroke-width="2.5"/>
-
-                    <!-- Wisteria Petal Clusters (Left, Center, Right) -->
-                    <!-- Cluster 1 (Left) -->
-                    <g transform="translate(40, 15)">
-                        <path d="M0,0 Q-5,25 0,50 Q-3,75 0,100" fill="none" stroke="#6B3A72" stroke-width="1.5"/>
-                        <ellipse cx="-2" cy="15" rx="7" ry="5" fill="#7B4B8A"/>
-                        <ellipse cx="4" cy="25" rx="8" ry="6" fill="#9D6BB0"/>
-                        <ellipse cx="-4" cy="40" rx="7" ry="6" fill="#B389C5"/>
-                        <ellipse cx="3" cy="55" rx="6" ry="5" fill="#C8A8D8"/>
-                        <ellipse cx="-2" cy="70" rx="5" ry="4" fill="#D5C2E2"/>
-                        <ellipse cx="1" cy="85" rx="4" ry="3" fill="#E7DCF0"/>
-                    </g>
-                    <g transform="translate(85, 20)">
-                        <path d="M0,0 Q5,30 0,65 Q3,90 0,120" fill="none" stroke="#5A2B68" stroke-width="1.5"/>
-                        <ellipse cx="0" cy="20" rx="8" ry="6" fill="#5A2B68"/>
-                        <ellipse cx="-5" cy="35" rx="9" ry="7" fill="#7B4B8A"/>
-                        <ellipse cx="5" cy="55" rx="8" ry="6" fill="#9D6BB0"/>
-                        <ellipse cx="-3" cy="75" rx="7" ry="5" fill="#B389C5"/>
-                        <ellipse cx="3" cy="95" rx="5" ry="4" fill="#D5C2E2"/>
-                        <ellipse cx="0" cy="110" rx="3" ry="3" fill="#E7DCF0"/>
-                    </g>
-
-                    <!-- Cluster 2 (Mid Left) -->
-                    <g transform="translate(140, 10)">
-                        <path d="M0,0 Q-4,20 0,45" fill="none" stroke="#5A2B68" stroke-width="1"/>
-                        <ellipse cx="0" cy="15" rx="7" ry="5" fill="#7B4B8A"/>
-                        <ellipse cx="3" cy="28" rx="6" ry="5" fill="#9D6BB0"/>
-                        <ellipse cx="-2" cy="40" rx="4" ry="3" fill="#C8A8D8"/>
-                    </g>
-                    <g transform="translate(180, 25)">
-                        <ellipse cx="0" cy="15" rx="8" ry="6" fill="#6B3A72"/>
-                        <ellipse cx="-4" cy="30" rx="7" ry="6" fill="#8E5A9D"/>
-                        <ellipse cx="4" cy="48" rx="6" ry="5" fill="#B389C5"/>
-                        <ellipse cx="-2" cy="65" rx="5" ry="4" fill="#D5C2E2"/>
-                    </g>
-
-                    <!-- Cluster 3 (Center Arch Canopy) -->
-                    <g transform="translate(245, 12)">
-                        <ellipse cx="0" cy="18" rx="9" ry="7" fill="#5A2B68"/>
-                        <ellipse cx="5" cy="35" rx="8" ry="6" fill="#7B4B8A"/>
-                        <ellipse cx="-5" cy="52" rx="8" ry="6" fill="#9D6BB0"/>
-                        <ellipse cx="3" cy="70" rx="7" ry="5" fill="#B389C5"/>
-                        <ellipse cx="-2" cy="88" rx="5" ry="4" fill="#C8A8D8"/>
-                        <ellipse cx="0" cy="102" rx="4" ry="3" fill="#E7DCF0"/>
-                    </g>
-
-                    <!-- Cluster 4 (Mid Right) -->
-                    <g transform="translate(315, 20)">
-                        <ellipse cx="0" cy="15" rx="8" ry="6" fill="#6B3A72"/>
-                        <ellipse cx="4" cy="32" rx="7" ry="6" fill="#8E5A9D"/>
-                        <ellipse cx="-3" cy="50" rx="6" ry="5" fill="#B389C5"/>
-                        <ellipse cx="1" cy="68" rx="4" ry="4" fill="#D5C2E2"/>
-                    </g>
-                    <g transform="translate(365, 12)">
-                        <ellipse cx="0" cy="15" rx="7" ry="5" fill="#7B4B8A"/>
-                        <ellipse cx="-3" cy="28" rx="6" ry="5" fill="#9D6BB0"/>
-                        <ellipse cx="2" cy="42" rx="4" ry="3" fill="#C8A8D8"/>
-                    </g>
-
-                    <!-- Cluster 5 (Right) -->
-                    <g transform="translate(415, 18)">
-                        <ellipse cx="0" cy="20" rx="9" ry="7" fill="#5A2B68"/>
-                        <ellipse cx="5" cy="38" rx="8" ry="6" fill="#7B4B8A"/>
-                        <ellipse cx="-4" cy="58" rx="8" ry="6" fill="#9D6BB0"/>
-                        <ellipse cx="3" cy="78" rx="7" ry="5" fill="#B389C5"/>
-                        <ellipse cx="-2" cy="98" rx="5" ry="4" fill="#D5C2E2"/>
-                        <ellipse cx="0" cy="112" rx="3" ry="3" fill="#E7DCF0"/>
-                    </g>
-                    <g transform="translate(460, 15)">
-                        <ellipse cx="-2" cy="15" rx="7" ry="5" fill="#7B4B8A"/>
-                        <ellipse cx="4" cy="28" rx="8" ry="6" fill="#9D6BB0"/>
-                        <ellipse cx="-3" cy="42" rx="6" ry="5" fill="#B389C5"/>
-                        <ellipse cx="2" cy="58" rx="5" ry="4" fill="#C8A8D8"/>
-                    </g>
-                </g>
-            </svg>
-
-            <!-- Card Inner Text Content -->
-            <div class="content">
-                <div class="invitation-for">Rahul & Simran invite you to the</div>
-
-                <!-- Lord Ganesha SVG Illustration -->
-                <svg class="ganesha-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Crown / Mukut -->
-                    <path d="M50 10 L58 28 L42 28 Z" fill="var(--purple-primary)"/>
-                    <path d="M44 28 C44 20, 56 20, 56 28 Z" fill="var(--gold-primary)"/>
-                    <circle cx="50" cy="18" r="2.5" fill="#FFFFFF"/>
-                    
-                    <!-- Ears -->
-                    <path d="M42 35 C20 28, 18 52, 38 52" fill="none" stroke="var(--purple-primary)" stroke-width="3" stroke-linecap="round"/>
-                    <path d="M58 35 C80 28, 82 52, 62 52" fill="none" stroke="var(--purple-primary)" stroke-width="3" stroke-linecap="round"/>
-                    
-                    <!-- Head & Trunk -->
-                    <path d="M38 38 C38 30, 62 30, 62 38 C62 50, 54 50, 54 62 C54 70, 62 70, 62 64 C62 60, 57 60, 57 64" fill="none" stroke="var(--purple-primary)" stroke-width="3.5" stroke-linecap="round"/>
-                    
-                    <!-- Tilak -->
-                    <path d="M46 32 L54 32 M47 35 L53 35 M50 31 L50 38" stroke="var(--gold-primary)" stroke-width="1.8"/>
-                    
-                    <!-- Seated Body Base -->
-                    <path d="M28 72 C28 62, 40 60, 50 60 C60 60, 72 62, 72 72 C72 80, 28 80, 28 72 Z" fill="none" stroke="var(--purple-primary)" stroke-width="3"/>
-                    <circle cx="50" cy="71" r="3" fill="var(--gold-primary)"/>
-                </svg>
-
-                <h1 class="title-main">Griha Pravesh</h1>
-                <div class="subtitle">of their new home</div>
-
-                <div class="event-date">24 April, 2030</div>
-                <div class="event-time">Sunday, 11:00 AM</div>
-
-                <div class="divider"></div>
-
-                <div class="event-location">
-                    428 Anywhere St., Any City, ST 12345
-                </div>
-
-                <div class="rsvp">RSVP at +123-456-7890</div>
+            <!-- Om Sacred Symbol -->
+            <div class="om-container">
+                <div class="om-symbol">🕉</div>
             </div>
 
-            <!-- Bottom Floral Accents SVG (Roses & Leaves) -->
-            <svg class="bottom-florals" viewBox="0 0 500 190" xmlns="http://www.w3.org/2000/svg">
-                <!-- Left Bottom Floral Cluster -->
-                <g transform="translate(0, 40)">
-                    <!-- Eucalyptus Leaves -->
-                    <path d="M 10 130 Q 50 80 110 90" fill="none" stroke="#526E5B" stroke-width="3"/>
-                    <ellipse cx="40" cy="110" rx="14" ry="8" fill="#728F7B" transform="rotate(-30 40 110)"/>
-                    <ellipse cx="70" cy="95" rx="15" ry="9" fill="#526E5B" transform="rotate(-15 70 95)"/>
-                    <ellipse cx="95" cy="90" rx="13" ry="7" fill="#88A491" transform="rotate(10 95 90)"/>
-                    
-                    <!-- White Rose Flower -->
-                    <g transform="translate(60, 110)">
-                        <circle cx="0" cy="0" r="30" fill="#FFFDF9" stroke="#E8DFD3" stroke-width="1"/>
-                        <path d="M -12 -5 C -5 -18, 12 -18, 15 -3 C 20 10, -5 20, -12 -5 Z" fill="#F8F2E8"/>
-                        <path d="M -6 -2 C -2 -10, 8 -10, 8 -1 C 10 6, -3 10, -6 -2 Z" fill="#EFE4D2"/>
-                        <circle cx="1" cy="1" r="4" fill="#E5D3B9"/>
-                    </g>
-                    <!-- Accent Petals -->
-                    <circle cx="20" cy="135" r="18" fill="#FAF5ED"/>
-                    <circle cx="105" cy="125" r="16" fill="#FFFDF9"/>
-                </g>
+            <!-- Invitation Text -->
+            <div class="invited-text">You are warmly invited to the</div>
+            <div class="main-heading">Griha Pravesh</div>
+            <div class="sub-heading">Ceremony</div>
+            <div class="home-text">of our new home on</div>
 
-                <!-- Right Bottom Floral Cluster -->
-                <g transform="translate(500, 40) scale(-1, 1)">
-                    <!-- Eucalyptus Leaves -->
-                    <path d="M 10 130 Q 50 80 110 90" fill="none" stroke="#526E5B" stroke-width="3"/>
-                    <ellipse cx="40" cy="110" rx="14" ry="8" fill="#728F7B" transform="rotate(-30 40 110)"/>
-                    <ellipse cx="70" cy="95" rx="15" ry="9" fill="#526E5B" transform="rotate(-15 70 95)"/>
-                    <ellipse cx="95" cy="90" rx="13" ry="7" fill="#88A491" transform="rotate(10 95 90)"/>
-                    
-                    <!-- White Rose Flower -->
-                    <g transform="translate(60, 110)">
-                        <circle cx="0" cy="0" r="30" fill="#FFFDF9" stroke="#E8DFD3" stroke-width="1"/>
-                        <path d="M -12 -5 C -5 -18, 12 -18, 15 -3 C 20 10, -5 20, -12 -5 Z" fill="#F8F2E8"/>
-                        <path d="M -6 -2 C -2 -10, 8 -10, 8 -1 C 10 6, -3 10, -6 -2 Z" fill="#EFE4D2"/>
-                        <circle cx="1" cy="1" r="4" fill="#E5D3B9"/>
-                    </g>
-                    <!-- Accent Petals -->
-                    <circle cx="20" cy="135" r="18" fill="#FAF5ED"/>
-                    <circle cx="105" cy="125" r="16" fill="#FFFDF9"/>
+            <!-- Diamond Divider -->
+            <div class="divider-container">
+                <div class="divider-line"></div>
+                <div class="divider-diamond"></div>
+                <div class="divider-line"></div>
+            </div>
+
+            <!-- Date Block -->
+            <div class="date-section">
+                <div class="month-header">JULY</div>
+                <div class="date-grid">
+                    <div class="day-name">SUNDAY</div>
+                    <div class="date-number">28</div>
+                    <div class="time-text">AT 8AM</div>
+                </div>
+                <div class="year-text">2025</div>
+            </div>
+
+            <div class="at-text">at</div>
+
+            <!-- Address -->
+            <div class="address-box">
+                123 ANYWHERE ST, ANY CITY,<br>ST 12345
+            </div>
+
+            <!-- Live Countdown Timer -->
+            <div class="countdown-title">Ceremony Countdown</div>
+            <div class="countdown-container" id="countdown">
+                <div class="count-box"><div class="count-number" id="days">00</div><div class="count-label">Days</div></div>
+                <div class="count-box"><div class="count-number" id="hours">00</div><div class="count-label">Hours</div></div>
+                <div class="count-box"><div class="count-number" id="minutes">00</div><div class="count-label">Mins</div></div>
+                <div class="count-box"><div class="count-number" id="seconds">00</div><div class="count-label">Secs</div></div>
+            </div>
+
+            <!-- RSVP Banner -->
+            <div class="rsvp-section">
+                RSVP : +123-456-7890
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button class="btn btn-gold" onclick="openRsvpModal()">
+                    💌 Send RSVP
+                </button>
+                <button class="btn" onclick="addToCalendar()">
+                    📅 Calendar
+                </button>
+                <a href="https://maps.google.com" target="_blank" class="btn">
+                    📍 Directions
+                </a>
+            </div>
+
+            <!-- Bottom Left Lotus Illustration -->
+            <svg class="lotus-corner lotus-left" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Stems -->
+                <path d="M40 160 Q 45 110 30 80" stroke="#4CAF50" stroke-width="4" stroke-linecap="round"/>
+                <path d="M50 160 Q 65 120 75 90" stroke="#388E3C" stroke-width="3" stroke-linecap="round"/>
+                <path d="M20 160 Q 25 130 15 110" stroke="#4CAF50" stroke-width="3.5" stroke-linecap="round"/>
+                <!-- Lotus Buds -->
+                <path d="M15 110 C 5 100 10 85 15 80 C 20 85 25 100 15 110 Z" fill="#F8BBD0" stroke="#C2185B" stroke-width="1"/>
+                <!-- Main Lotus Flower Left -->
+                <g transform="translate(10, 30)">
+                    <path d="M35 50 C 15 35 10 15 35 0 C 60 15 55 35 35 50 Z" fill="#FF80AB" stroke="#9E0043" stroke-width="1"/>
+                    <path d="M35 50 C 0 30 0 10 20 10 C 30 25 35 40 35 50 Z" fill="#F8BBD0" stroke="#C2185B" stroke-width="1"/>
+                    <path d="M35 50 C 70 30 70 10 50 10 C 40 25 35 40 35 50 Z" fill="#F8BBD0" stroke="#C2185B" stroke-width="1"/>
+                    <path d="M35 50 C -10 40 0 25 10 20 C 25 30 30 45 35 50 Z" fill="#FFC1E3" opacity="0.9"/>
+                    <path d="M35 50 C 80 40 70 25 60 20 C 45 30 40 45 35 50 Z" fill="#FFC1E3" opacity="0.9"/>
+                    <!-- Yellow Anther Core -->
+                    <circle cx="35" cy="30" r="5" fill="#FFEB3B"/>
+                </g>
+                <!-- Smaller Lotus Right -->
+                <g transform="translate(55, 50) scale(0.75)">
+                    <path d="M35 50 C 15 35 10 15 35 0 C 60 15 55 35 35 50 Z" fill="#FF80AB" stroke="#9E0043" stroke-width="1"/>
+                    <path d="M35 50 C 0 30 0 10 20 10 C 30 25 35 40 35 50 Z" fill="#F8BBD0" stroke="#C2185B" stroke-width="1"/>
+                    <path d="M35 50 C 70 30 70 10 50 10 C 40 25 35 40 35 50 Z" fill="#F8BBD0" stroke="#C2185B" stroke-width="1"/>
+                    <circle cx="35" cy="30" r="4" fill="#FFEB3B"/>
+                </g>
+            </svg>
+
+            <!-- Bottom Right Lotus Illustration -->
+            <svg class="lotus-corner lotus-right" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Stems -->
+                <path d="M40 160 Q 45 110 30 80" stroke="#4CAF50" stroke-width="4" stroke-linecap="round"/>
+                <path d="M50 160 Q 65 120 75 90" stroke="#388E3C" stroke-width="3" stroke-linecap="round"/>
+                <path d="M20 160 Q 25 130 15 110" stroke="#4CAF50" stroke-width="3.5" stroke-linecap="round"/>
+                <!-- Main Lotus Flower -->
+                <g transform="translate(10, 30)">
+                    <path d="M35 50 C 15 35 10 15 35 0 C 60 15 55 35 35 50 Z" fill="#FF80AB" stroke="#9E0043" stroke-width="1"/>
+                    <path d="M35 50 C 0 30 0 10 20 10 C 30 25 35 40 35 50 Z" fill="#F8BBD0" stroke="#C2185B" stroke-width="1"/>
+                    <path d="M35 50 C 70 30 70 10 50 10 C 40 25 35 40 35 50 Z" fill="#F8BBD0" stroke="#C2185B" stroke-width="1"/>
+                    <circle cx="35" cy="30" r="5" fill="#FFEB3B"/>
+                </g>
+                <g transform="translate(55, 50) scale(0.75)">
+                    <path d="M35 50 C 15 35 10 15 35 0 C 60 15 55 35 35 50 Z" fill="#FF80AB" stroke="#9E0043" stroke-width="1"/>
+                    <path d="M35 50 C 0 30 0 10 20 10 C 30 25 35 40 35 50 Z" fill="#F8BBD0" stroke="#C2185B" stroke-width="1"/>
+                    <path d="M35 50 C 70 30 70 10 50 10 C 40 25 35 40 35 50 Z" fill="#F8BBD0" stroke="#C2185B" stroke-width="1"/>
+                    <circle cx="35" cy="30" r="4" fill="#FFEB3B"/>
                 </g>
             </svg>
 
         </div>
     </div>
 
+    <!-- RSVP Interactive Modal Popup -->
+    <div class="modal" id="rsvpModal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeRsvpModal()">&times;</span>
+            <div class="main-heading" style="font-size: 22px; margin-bottom: 15px;">Confirm RSVP</div>
+            <form id="rsvpForm" onsubmit="submitRSVP(event)">
+                <div class="form-group">
+                    <label for="guestName">Your Full Name</label>
+                    <input type="text" id="guestName" required placeholder="e.g. John & Family">
+                </div>
+                <div class="form-group">
+                    <label for="attendance">Will you attend?</label>
+                    <select id="attendance" required>
+                        <option value="Joyfully Accept">Joyfully Accept</option>
+                        <option value="Regretfully Decline">Regretfully Decline</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="guestCount">Number of Guests</label>
+                    <input type="number" id="guestCount" min="1" max="10" value="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Warm Wishes / Message</label>
+                    <textarea id="message" rows="3" placeholder="Write a note for the new home..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-gold" style="width: 100%; justify-content: center;">
+                    Submit Response
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript Interactive Code -->
+    <script>
+        /* 1. Interactive Countdown Timer */
+        const eventDate = new Date("July 28, 2025 08:00:00").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const difference = eventDate - now;
+
+            if (difference > 0) {
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                document.getElementById("days").innerText = String(days).padStart(2, '0');
+                document.getElementById("hours").innerText = String(hours).padStart(2, '0');
+                document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
+                document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
+            } else {
+                document.getElementById("countdown").innerHTML = "<div style='color: var(--primary-magenta); font-weight: bold;'>The Ceremony Has Begun!</div>";
+            }
+        }
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        /* 2. RSVP Modal Handlers */
+        function openRsvpModal() {
+            document.getElementById("rsvpModal").style.display = "flex";
+        }
+
+        function closeRsvpModal() {
+            document.getElementById("rsvpModal").style.display = "none";
+        }
+
+        function submitRSVP(e) {
+            e.preventDefault();
+            const name = document.getElementById("guestName").value;
+            alert(`Thank you, ${name}! Your RSVP response has been successfully recorded.`);
+            closeRsvpModal();
+        }
+
+        /* 3. Add to Calendar Handler */
+        function addToCalendar() {
+            const title = encodeURIComponent("Griha Pravesh Ceremony");
+            const details = encodeURIComponent("You are warmly invited to celebrate our Griha Pravesh Ceremony at our new home!");
+            const location = encodeURIComponent("123 Anywhere St, Any City, ST 12345");
+            const startTime = "20250728T023000Z"; // 8:00 AM IST approx in UTC
+            const endTime = "20250728T063000Z";
+
+            const googleCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startTime}/${endTime}&details=${details}&location=${location}`;
+            window.open(googleCalUrl, '_blank');
+        }
+
+        /* 4. Canvas Floating Lotus Petals Particle Effect */
+        const canvas = document.getElementById('petal-canvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Petal {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height - canvas.height;
+                this.size = Math.random() * 12 + 8;
+                this.speedY = Math.random() * 1.2 + 0.6;
+                this.speedX = Math.random() * 0.8 - 0.4;
+                this.rotation = Math.random() * 360;
+                this.rotSpeed = Math.random() * 1 - 0.5;
+                this.color = Math.random() > 0.5 ? '#FF80AB' : '#F8BBD0';
+                this.opacity = Math.random() * 0.6 + 0.3;
+            }
+
+            update() {
+                this.y += this.speedY;
+                this.x += Math.sin(this.y * 0.01) + this.speedX;
+                this.rotation += this.rotSpeed;
+
+                if (this.y > canvas.height) {
+                    this.y = -20;
+                    this.x = Math.random() * canvas.width;
+                }
+            }
+
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate((this.rotation * Math.PI) / 180);
+                ctx.globalAlpha = this.opacity;
+                ctx.fillStyle = this.color;
+
+                // Draw Lotus Petal Shape
+                ctx.beginPath();
+                ctx.moveTo(0, 0);
+                ctx.bezierCurveTo(-this.size / 2, -this.size / 2, -this.size / 2, -this.size, 0, -this.size * 1.3);
+                ctx.bezierCurveTo(this.size / 2, -this.size, this.size / 2, -this.size / 2, 0, 0);
+                ctx.fill();
+
+                ctx.restore();
+            }
+        }
+
+        const petals = Array.from({ length: 28 }, () => new Petal());
+
+        function animatePetals() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            petals.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animatePetals);
+        }
+        animatePetals();
+    </script>
 </body>
 </html>
