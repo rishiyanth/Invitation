@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Housewarming Invitation | Rishiyanth S</title>
+    
+    <!-- Open Graph for WhatsApp / Social Media Link Preview -->
+    <meta property="og:title" content="Griha Pravesh Invitation - Rishiyanth S">
+    <meta property="og:description" content="Join us to celebrate our new home on 20th November at 5:30 AM. S2, Ganga Enclave, Vadapalani.">
+    <meta property="og:type" content="website">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-color: #FAF7F2;
+            --primary: #8C6239;
+            --accent: #D4A373;
+            --accent-light: #F4EAD3;
+            --text-dark: #2D2320;
+            --card-bg: rgba(255, 255, 255, 0.88);
+            --gold-glow: rgba(212, 163, 115, 0.3);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            font-family: 'Montserrat', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 15px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Ambient Background Glow */
+        .bg-glow {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, var(--gold-glow) 0%, rgba(255,255,255,0) 70%);
+            border-radius: 50%;
+            z-index: 0;
+            animation: pulseGlow 6s infinite alternate ease-in-out;
+        }
+
+        .glow-top-left { top: -100px; left: -100px; }
+        .glow-bottom-right { bottom: -100px; right: -100px; }
+
+        /* Main Card Container */
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--accent-light);
+            border-radius: 24px;
+            box-shadow: 0 15px 35px rgba(140, 98, 57, 0.08);
+            width: 100%;
+            max-width: 480px;
+            padding: 40px 25px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            animation: slideUp 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* SVG Ornamental Corner Borders */
+        .border-corner {
+            position: absolute;
+            width: 55px;
+            height: 55px;
+            opacity: 0.7;
+            pointer-events: none;
+        }
+        .corner-tl { top: 12px; left: 12px; }
+        .corner-tr { top: 12px; right: 12px; transform: scaleX(-1); }
+        .corner-bl { bottom: 12px; left: 12px; transform: scaleY(-1); }
+        .corner-br { bottom: 12px; right: 12px; transform: scale(-1, -1); }
+
+        /* Header Illustration */
+        .header-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 15px auto;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .script-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 5px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+
+        .main-heading {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+        }
+
+        .sub-text {
+            font-size: 0.9rem;
+            font-weight: 300;
+            color: #665;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .host-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 10px 0 20px 0;
+            position: relative;
+            display: inline-block;
+        }
+
+        .host-name::after {
+            content: '';
+            display: block;
+            width: 60%;
+            height: 1px;
+            background: var(--accent);
+            margin: 8px auto 0 auto;
+            border-radius: 2px;
+        }
+
+        /* Event Details Box */
+        .details-box {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid var(--accent-light);
+            border-radius: 16px;
+            padding: 20px 15px;
+            margin: 20px 0;
+        }
+
+        .detail-item {
+            margin-bottom: 15px;
+        }
+        .detail-item:last-child { margin-bottom: 0; }
+
+        .detail-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .detail-value {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        /* Countdown Timer */
+        .countdown-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #887;
+            margin-bottom: 10px;
+        }
+
+        .timer-container {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .timer-unit {
+            background: var(--primary);
+            color: #FFF;
+            padding: 8px 12px;
+            border-radius: 10px;
+            min-width: 55px;
+            box-shadow: 0 4px 10px rgba(140, 98, 57, 0.2);
+        }
+
+        .timer-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .timer-label {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.85;
+        }
+
+        /* Buttons */
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 14px 20px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #FFF;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: #724e2c;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(140, 98, 57, 0.3);
+        }
+
+        .btn-secondary {
+            background: #FFF;
+            color: var(--primary);
+            border: 1px solid var(--accent);
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent-light);
+            transform: translateY(-2px);
+        }
+
+        /* RSVP Footer */
+        .rsvp-section {
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 1px dashed var(--accent);
+        }
+
+        .rsvp-title {
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .rsvp-names {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        /* Animations */
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        @keyframes pulseGlow {
+            0% { transform: scale(1); opacity: 0.5; }
+            100% { transform: scale(1.2); opacity: 0.8; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Ambient Glow BG -->
+    <div class="bg-glow glow-top-left"></div>
+    <div class="bg-glow glow-bottom-right"></div>
+
+    <!-- Main Card -->
+    <div class="card">
+        
+        <!-- Corner Decorative Borders -->
+        <svg class="border-corner corner-tl" viewBox="0 0 100 100">
+            <path d="M10,10 L40,10 M10,10 L10,40 M10,10 L90,90" stroke="#8C6239" stroke-width="3" fill="none"/>
+            <circle cx="10" cy="10" r="5" fill="#D4A373"/>
+            <path d="M25,25 Q50,10 75,25" stroke="#D4A373" stroke-width="2" fill="none"/>
+        </svg>
+        <svg class="border-corner corner-tr" viewBox="0 0 100 100">
+            <path d="M10,10 L40,10 M10,10 L10,40 M10,10 L90,90" stroke="#8C6239" stroke-width="3" fill="none"/>
+            <circle cx="10" cy="10" r="5" fill="#D4A373"/>
+            <path d="M25,25 Q50,10 75,25" stroke="#D4A373" stroke-width="2" fill="none"/>
+        </svg>
+        <svg class="border-corner corner-bl" viewBox="0 0 100 100">
+            <path d="M10,10 L40,10 M10,10 L10,40 M10,10 L90,90" stroke="#8C6239" stroke-width="3" fill="none"/>
+            <circle cx="10" cy="10" r="5" fill="#D4A373"/>
+            <path d="M25,25 Q50,10 75,25" stroke="#D4A373" stroke-width="2" fill="none"/>
+        </svg>
+        <svg class="border-corner corner-br" viewBox="0 0 100 100">
+            <path d="M10,10 L40,10 M10,10 L10,40 M10,10 L90,90" stroke="#8C6239" stroke-width="3" fill="none"/>
+            <circle cx="10" cy="10" r="5" fill="#D4A373"/>
+            <path d="M25,25 Q50,10 75,25" stroke="#D4A373" stroke-width="2" fill="none"/>
+        </svg>
+
+        <!-- Header House SVG Icon -->
+        <svg class="header-icon" viewBox="0 0 64 64" fill="none">
+            <path d="M32 6L6 28H14V54H50V28H58L32 6Z" fill="#F4EAD3" stroke="#8C6239" stroke-width="2"/>
+            <path d="M26 54V36H38V54" fill="#D4A373" stroke="#8C6239" stroke-width="2"/>
+            <path d="M32 18L44 28H20L32 18Z" fill="#8C6239"/>
+            <circle cx="32" cy="42" r="2" fill="#FAF7F2"/>
+        </svg>
+
+        <div class="script-title">Griha Pravesh</div>
+        <div class="main-heading">Housewarming</div>
+
+        <p class="sub-text">
+            We cordially invite you and your family to join us in celebrating the warm beginnings of our new home!
+        </p>
+
+        <div class="host-name">Rishiyanth S</div>
+
+        <!-- Event Details Card -->
+        <div class="details-box">
+            <div class="detail-item">
+                <div class="detail-label">Date & Time</div>
+                <div class="detail-value">20th November | 5:30 AM IST</div>
+            </div>
+            <div class="detail-item" style="margin-top: 15px;">
+                <div class="detail-label">Venue</div>
+                <div class="detail-value" style="font-size: 1.05rem; line-height: 1.4;">
+                    S2, Ganga Enclave, Kambar Street,<br>
+                    Gandhi Nagar, Vadapalani, Chennai - 600093
+                </div>
+            </div>
+        </div>
+
+        <!-- Countdown Timer -->
+        <div class="countdown-title">Counting Down To The Celebration</div>
+        <div class="timer-container" id="timer">
+            <div class="timer-unit">
+                <div class="timer-num" id="days">00</div>
+                <div class="timer-label">Days</div>
+            </div>
+            <div class="timer-unit">
+                <div class="timer-num" id="hours">00</div>
+                <div class="timer-label">Hours</div>
+            </div>
+            <div class="timer-unit">
+                <div class="timer-num" id="minutes">00</div>
+                <div class="timer-label">Mins</div>
+            </div>
+            <div class="timer-unit">
+                <div class="timer-num" id="seconds">00</div>
+                <div class="timer-label">Secs</div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="btn-group">
+            <a href="https://maps.app.goo.gl/TMD5trQdsiTikC3e6" target="_blank" class="btn btn-primary">
+                📍 Open Location in Google Maps
+            </a>
+            <a href="https://api.whatsapp.com/send?text=Hi%20Rishiyanth,%20I'm%20delighted%20to%20attend%20your%20Housewarming%20function%20on%2020th%20November!" target="_blank" class="btn btn-secondary">
+                💬 RSVP on WhatsApp
+            </a>
+        </div>
+
+        <!-- RSVP Footer -->
+        <div class="rsvp-section">
+            <div class="rsvp-title">With Best Compliments</div>
+            <div class="rsvp-names">Seenuvasan, Vidhya & Yashaswini</div>
+        </div>
+
+    </div>
+
+    <!-- Countdown Timer Script -->
+    <script>
+        // Set target date: Nov 20, 2026 @ 05:30:00 AM IST
+        const eventDate = new Date("November 20, 2026 05:30:00").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = eventDate - now;
+
+            if (distance < 0) {
+                document.getElementById("timer").innerHTML = "<div style='font-family: Cormorant Garamond; font-size: 1.2rem; font-weight:bold; color:#8C6239;'>The Ceremony Has Begun!</div>";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerText = days < 10 ? '0' + days : days;
+            document.getElementById("hours").innerText = hours < 10 ? '0' + hours : hours;
+            document.getElementById("minutes").innerText = minutes < 10 ? '0' + minutes : minutes;
+            document.getElementById("seconds").innerText = seconds < 10 ? '0' + seconds : seconds;
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+</body>
+</html>
