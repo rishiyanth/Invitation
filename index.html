@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="theme-color" content="#210b2e">
-	<title>Griha Pravesh | Anandam</title>
+	<title>Griha Pravesham</title>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@600;700;900&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
@@ -72,7 +72,7 @@
 			object-fit: contain;
 			filter: drop-shadow(0 3px 8px rgba(0, 0, 0, .3));
 		}
-		.eyebrow { margin: 0 0 12px; color: #f7a9bd; text-transform: uppercase; letter-spacing: .3em; font-size: .68rem; font-weight: 700; }
+		.eyebrow { margin: 0 0 12px; color: #f7a9bd; text-transform: uppercase; letter-spacing: .3em; font-size: 0.7rem; font-weight: 700; }
 		.title-wrap { position: relative; display: grid; place-items: center; min-height: 220px; width: min(100%, 570px); }
 		.mandala { position: absolute; width: min(92vw, 390px); opacity: .28; animation: spin 34s linear infinite; }
 		.mandala circle, .mandala path { fill: none; stroke: var(--gold); stroke-width: 1.5; }
@@ -88,10 +88,11 @@
 		.invitation::before, .invitation::after { content: ""; position: absolute; top: 9px; width: 36px; height: 36px; border-top: 2px solid var(--gold); }
 		.invitation::before { left: 9px; border-left: 2px solid var(--gold); }
 		.invitation::after { right: 9px; border-right: 2px solid var(--gold); }
-		.invitation p { max-width: 670px; margin: 0 auto; color: #fbeac6; font: 500 clamp(1.02rem, 3.3vw, 1.22rem)/1.85 "Playfair Display", serif; }
+		.invitation p { max-width: 670px; margin: 0 auto; color: #fbeac6; font: italic 500 clamp(1rem, 3.9vw, 1.3rem)/1.55 "Playfair Display", serif; }
 		#invitationMessage { white-space: pre-line; }
+		#hostDisplay { white-space: pre-line; font-size: 1.05rem; }
 		.signature { margin-top: 22px !important; color: var(--gold-light) !important; font-style: italic; }
-		.signature strong { display: block; margin-top: 7px; color: var(--ink); font: 700 1rem "DM Sans", sans-serif; }
+		.signature strong { display: block; margin-top: 7px; color: var(--ink); font: 500 clamp(1rem, 3.9vw, 1.3rem)/1.55 "Cinzel Decorative", serif; text-shadow: 0 5px 22px rgba(0, 0, 0, .35); animation: shimmer 7s linear infinite; }
 		.details { display: grid; grid-template-columns: 1fr; margin: 28px 0 21px; border-top: 1px solid rgba(248, 202, 97, .55); border-bottom: 1px solid rgba(248, 202, 97, .55); }
 		.detail-card { min-height: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 19px 12px; text-align: center; opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
 		.detail-card.visible { opacity: 1; transform: translateY(0); }
@@ -134,7 +135,8 @@
 					<g><path d="M31 41 Q51 80 70 40 Q50 38 31 41"/><path d="M92 47 Q114 88 135 47 Q113 44 92 47"/><path d="M151 41 Q180 82 206 40 Q178 37 151 41"/><path d="M217 45 Q245 88 272 43 Q244 40 217 45"/><path d="M282 41 Q309 86 337 42 Q309 38 282 41"/><path d="M348 43 Q377 88 405 42 Q376 39 348 43"/><path d="M414 42 Q443 85 470 41 Q441 38 414 42"/><path d="M480 43 Q510 83 538 39 Q509 37 480 43"/></g>
 				</g>
 			</svg>
-			<img class="om-symbol" src="./Ganesha_img.jpg" alt="Ganesha image" />
+			<p class="eyebrow">|| ஸ்ரீ ஊத்துக்காடு எல்லை அம்மன் துணை ||</p>
+			<!-- <img class="om-symbol" src="./Ganesha_img.jpg" alt="Ganesha image" /> -->
 			<p class="eyebrow"></p>
             <br><br>
 			<div class="title-wrap">
@@ -168,12 +170,14 @@
 	<script>
 		// Edit these values to personalise the invitation. Keep the date in YYYY-MM-DD format for calendar links.
 		const eventDetails = {
-			hosts: "Rishiyanth S",
-			occasion: "Griha Pravesh",
-			titleLine: "A New Beginning",
+			hosts: `Rishiyanth S 
+					and 
+					Family`,
+			occasion: "Griha Pravesham",
+			titleLine: "GRIHA PRAVESHAM",
 			invitationMessage: `
                 With the blessings of the Almighty,
-                We are delighted to invite you to the Griha Pravesh of our new home. 
+                We are delighted to invite you to the Griha Pravesham of our new home. 
                 Your gracious presence and blessings will make this occasion truly memorable.
             `,
 			closingMessage: "With warm regards",
@@ -193,7 +197,7 @@
 		byId("timeDisplay").textContent = eventDetails.time;
 		byId("addressDisplay").textContent = eventDetails.address;
 		byId("mapLink").href = eventDetails.mapsUrl;
-		document.title = `${eventDetails.occasion} | ${eventDetails.titleLine}`;
+		document.title = `${eventDetails.occasion} - ${eventDetails.hosts.split("\n")[0].trim()}`;
 
 		const calendarStart = `${eventDetails.date.replace(/-/g, "")}T083000`;
 		const calendarEnd = `${eventDetails.date.replace(/-/g, "")}T123000`;
