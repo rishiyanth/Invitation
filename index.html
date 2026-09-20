@@ -88,9 +88,10 @@
 		.invitation::before, .invitation::after { content: ""; position: absolute; top: 9px; width: 36px; height: 36px; border-top: 2px solid var(--gold); }
 		.invitation::before { left: 9px; border-left: 2px solid var(--gold); }
 		.invitation::after { right: 9px; border-right: 2px solid var(--gold); }
-		.invitation p { max-width: 670px; margin: 0 auto; color: #fbeac6; font: italic 500 clamp(1rem, 3.9vw, 1.3rem)/1.55 "Playfair Display", serif; }
+		.invitation p { max-width: 670px; margin: 0 auto; color: #fbeac6; font: 500 clamp(1rem, 3.9vw, 1.3rem)/1.55 "Playfair Display", serif; }
 		#invitationMessage { white-space: pre-line; }
 		#hostDisplay { white-space: pre-line; font-size: 1.05rem; }
+		#addressDisplay { white-space: pre-line; font-size: 1.05rem; }
 		.signature { margin-top: 22px !important; color: var(--gold-light) !important; font-style: italic; }
 		.signature strong { display: block; margin-top: 7px; color: var(--ink); font: 500 clamp(1rem, 3.9vw, 1.3rem)/1.55 "Cinzel Decorative", serif; text-shadow: 0 5px 22px rgba(0, 0, 0, .35); animation: shimmer 7s linear infinite; }
 		.details { display: grid; grid-template-columns: 1fr; margin: 28px 0 21px; border-top: 1px solid rgba(248, 202, 97, .55); border-bottom: 1px solid rgba(248, 202, 97, .55); }
@@ -135,13 +136,13 @@
 					<g><path d="M31 41 Q51 80 70 40 Q50 38 31 41"/><path d="M92 47 Q114 88 135 47 Q113 44 92 47"/><path d="M151 41 Q180 82 206 40 Q178 37 151 41"/><path d="M217 45 Q245 88 272 43 Q244 40 217 45"/><path d="M282 41 Q309 86 337 42 Q309 38 282 41"/><path d="M348 43 Q377 88 405 42 Q376 39 348 43"/><path d="M414 42 Q443 85 470 41 Q441 38 414 42"/><path d="M480 43 Q510 83 538 39 Q509 37 480 43"/></g>
 				</g>
 			</svg>
-			<p class="eyebrow">|| ஸ்ரீ ஊத்துக்காடு எல்லை அம்மன் துணை ||</p>
+			<p class="eyebrow">|| ஸ்ரீ ஊத்துக்காடு எல்லையம்மன் கோயில் ||</p>
 			<!-- <img class="om-symbol" src="./Ganesha_img.jpg" alt="Ganesha image" /> -->
 			<p class="eyebrow"></p>
             <br><br>
 			<div class="title-wrap">
 				<svg class="mandala" viewBox="0 0 400 400" aria-hidden="true"><circle cx="200" cy="200" r="160"/><circle cx="200" cy="200" r="128"/><circle cx="200" cy="200" r="92"/><g class="petal"><path d="M200 200 C145 150 150 91 200 40 C250 91 255 150 200 200Z"/><path d="M200 200 C250 150 309 150 360 200 C309 250 250 250 200 200Z"/><path d="M200 200 C250 250 250 309 200 360 C150 309 150 250 200 200Z"/><path d="M200 200 C150 250 91 250 40 200 C91 150 150 150 200 200Z"/></g><path d="M200 29 L218 174 L339 79 L226 185 L371 200 L226 215 L339 321 L218 226 L200 371 L182 226 L61 321 L174 215 L29 200 L174 185 L61 79 L182 174Z"/><circle cx="200" cy="200" r="24"/></svg>
-				<h1 id="titleLine">A New Beginning</h1>
+				<h1 id="titleLine">GRIHA PRAVESHAM</h1>
 			</div>
 			<p class="subtitle">A home blessed with love is the greatest wealth.</p>
 			<div class="hero-rule" aria-hidden="true">&#10022;</div>
@@ -154,9 +155,9 @@
 			</article>
 
 			<div class="details" aria-label="Event details">
-				<article class="detail-card"><span class="detail-icon">&#128197;</span><span class="detail-label">Date &amp; day</span><span class="detail-value" id="dateDisplay">Sunday, 12 October 2026</span></article>
-				<article class="detail-card"><span class="detail-icon">&#9200;</span><span class="detail-label">Muhurtham / time</span><span class="detail-value" id="timeDisplay">8:30 AM onwards</span></article>
+				<article class="detail-card"><span class="detail-icon">&#128197;</span><span class="detail-label">Date &amp; time</span><span class="detail-value"><span id="dateDisplay">Sunday, 12 October 2026</span><br><span id="timeDisplay">8:30 AM onwards</span></span></article>
 				<article class="detail-card"><span class="detail-icon">&#128205;</span><span class="detail-label">Venue</span><span class="detail-value" id="addressDisplay">[Full address]</span></article>
+				<article class="detail-card"><span class="detail-icon">&#9742;</span><span class="detail-label">Contact</span><span class="detail-value" id="contactDisplay">[Contact details]</span></article>
 			</div>
 			<div class="actions">
 				<a class="action" id="mapLink" href="[URL]" target="_blank" rel="noopener">&#128205; View Location</a>
@@ -177,25 +178,27 @@
 			titleLine: "GRIHA PRAVESHAM",
 			invitationMessage: `
                 With the blessings of the Almighty,
-                We are delighted to invite you to the Griha Pravesham of our new home. 
+                We are delighted to invite you to the <b><i>Griha Pravesham</i></b> of our new home. 
                 Your gracious presence and blessings will make this occasion truly memorable.
             `,
 			closingMessage: "With warm regards",
-			address: "S2, Ganga Enclave, Kambar Street, Gandhi Nagar, Vadapalani - 600093",
+			address: "S2, Ganga Enclave, Kambar Street, Gandhi Nagar, Vadapalani - 600093.",
+			contact: "+91 866722012 / +91 9444433415",
 			date: "2026-11-20",
 			dateLabel: "Friday, 20 November 2026",
-			time: "5:30 AM onwards",
+			time: "4:00 AM onwards",
 			mapsUrl: "https://maps.app.goo.gl/TMD5trQdsiTikC3e6"
 		};
 
 		const byId = (id) => document.getElementById(id);
-		byId("invitationMessage").textContent = eventDetails.invitationMessage;
+		byId("invitationMessage").innerHTML = eventDetails.invitationMessage;
 		byId("closingMessage").textContent = eventDetails.closingMessage;
 		byId("hostDisplay").textContent = eventDetails.hosts;
 		byId("titleLine").textContent = eventDetails.titleLine;
 		byId("dateDisplay").textContent = eventDetails.dateLabel;
 		byId("timeDisplay").textContent = eventDetails.time;
 		byId("addressDisplay").textContent = eventDetails.address;
+		byId("contactDisplay").textContent = eventDetails.contact;
 		byId("mapLink").href = eventDetails.mapsUrl;
 		document.title = `${eventDetails.occasion} - ${eventDetails.hosts.split("\n")[0].trim()}`;
 
