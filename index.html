@@ -10,17 +10,21 @@
 	<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@600;700;900&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
 	<style>
 		:root {
-			--maroon: #210b2e;
-			--maroon-soft: #361139;
-			--rani: #d92368;
-			--orange: #f48c28;
-			--teal: #0f958f;
+			--maroon: #1d1217;
+			--maroon-soft: #2c1f24;
+			--rani: #c13a49;
+			--orange: #d98a36;
+			--teal: #0d8d85;
 			--blue: #234fa2;
-			--emerald: #168257;
-			--gold: #f8ca61;
-			--gold-light: #fff0ad;
-			--ink: #fff7da;
-			--muted: #e5cba9;
+			--emerald: #2e7d4a;
+			--gold: #d7a85e;
+			--gold-light: #f4d68c;
+			--leaf-deep: #163b2c;
+			--leaf-mid: #2d6d41;
+			--leaf-soft: #7aa96b;
+			--leaf-light: #dfeeb8;
+			--ink: #fff8ea;
+			--muted: #f0dcc4;
 			--shadow: rgba(8, 2, 14, .46);
 		}
 
@@ -31,7 +35,7 @@
 			min-width: 320px;
 			overflow-x: hidden;
 			color: var(--ink);
-			background: var(--maroon);
+			background: linear-gradient(135deg, #152f24 0%, #183d2e 18%, #2d2617 50%, #1d1217 100%);
 			font-family: "DM Sans", sans-serif;
 		}
 		button, a { font: inherit; }
@@ -43,22 +47,36 @@
 			position: fixed;
 			z-index: -2;
 			inset: 0;
-			background: radial-gradient(circle at 50% 12%, #672042 0, transparent 34%), linear-gradient(145deg, #210b2e 15%, #3e102f 54%, #101e42 100%);
+			background: radial-gradient(circle at 50% 12%, rgba(125, 168, 96, 0.6) 0, transparent 30%), linear-gradient(145deg, #122a1d 10%, #214d35 36%, #2a2114 72%, #140d11 100%);
 		}
 		.page::after {
 			content: "";
 			position: fixed;
 			z-index: -1;
 			inset: 0;
-			opacity: .14;
-			background-image: radial-gradient(var(--gold) .7px, transparent .7px);
-			background-size: 19px 19px;
+			opacity: .12;
+			background-image: radial-gradient(var(--gold-light) 1px, transparent 1px);
+			background-size: 18px 18px;
 			pointer-events: none;
 		}
 		.hero { position: relative; min-height: auto; padding: 12px 16px 28px; display: flex; flex-direction: column; align-items: center; text-align: center; }
-		.toran { width: min(100%, 620px); height: 75px; overflow: visible; }
-		.toran path { fill: var(--orange); stroke: var(--gold); stroke-width: 1.5; }
-		.toran .bead { fill: var(--teal); stroke: var(--gold); }
+		.toran { width: min(100%, 660px); height: 102px; overflow: visible; filter: drop-shadow(0 9px 14px rgba(0,0,0,.18)); }
+		.toran .arch { fill: none; stroke: rgba(244, 214, 140, 0.9); stroke-width: 2.5; stroke-linecap: round; }
+		.toran .leaf {
+			fill: url(#leafGradient);
+			stroke: rgba(240, 220, 196, 0.85);
+			stroke-width: 1.5;
+		}
+		.toran .leaf.small {
+			fill: url(#leafGradientSmall);
+		}
+		.toran .vein {
+			fill: none;
+			stroke: rgba(255, 248, 234, 0.8);
+			stroke-width: 1.2;
+			stroke-linecap: round;
+		}
+		.toran .bud { fill: rgba(217,138,54,0.9); stroke: rgba(255,248,234,0.8); stroke-width: 1.4; }
 		.toran-group { transform-origin: center top; animation: sway 4s ease-in-out infinite; }
 		.om-symbol {
 			display: block;
@@ -128,16 +146,48 @@
 	<div id="sparkles" aria-hidden="true"></div>
 	<main class="page">
 		<section class="hero" aria-labelledby="titleLine">
-			<svg class="toran" viewBox="0 0 600 100" role="img" aria-label="Marigold toran decoration">
+			<svg class="toran" viewBox="0 0 660 110" role="img" aria-label="Mango leaf toran decoration">
+				<defs>
+					<linearGradient id="leafGradient" x1="0%" x2="100%" y1="0%" y2="100%">
+						<stop offset="0%" stop-color="#dff2b2"/>
+						<stop offset="45%" stop-color="#77a85f"/>
+						<stop offset="100%" stop-color="#1e5638"/>
+					</linearGradient>
+					<linearGradient id="leafGradientSmall" x1="0%" x2="100%" y1="0%" y2="100%">
+						<stop offset="0%" stop-color="#eaf8c5"/>
+						<stop offset="52%" stop-color="#8abb67"/>
+						<stop offset="100%" stop-color="#2e6d42"/>
+					</linearGradient>
+				</defs>
 				<g class="toran-group">
-					<path d="M5 7 Q100 45 185 10 T365 10 T595 7" fill="none" stroke="#f8ca61" stroke-width="3"/>
-					<path d="M34 17 Q50 52 65 18 Q82 55 98 27 Q115 59 131 27 Q150 59 168 21 Q184 58 200 18 Q218 61 236 21 Q254 59 272 18 Q290 60 308 20 Q327 57 345 18 Q364 59 382 18 Q399 58 418 25 Q436 59 453 20 Q470 56 488 20 Q507 58 524 24 Q542 54 558 17" fill="none" stroke="#f8ca61" stroke-width="3"/>
-					<g class="bead"><circle cx="52" cy="27" r="8"/><circle cx="116" cy="35" r="8"/><circle cx="181" cy="28" r="8"/><circle cx="246" cy="34" r="8"/><circle cx="311" cy="29" r="8"/><circle cx="377" cy="32" r="8"/><circle cx="442" cy="28" r="8"/><circle cx="508" cy="31" r="8"/><circle cx="558" cy="25" r="8"/></g>
-					<g><path d="M31 41 Q51 80 70 40 Q50 38 31 41"/><path d="M92 47 Q114 88 135 47 Q113 44 92 47"/><path d="M151 41 Q180 82 206 40 Q178 37 151 41"/><path d="M217 45 Q245 88 272 43 Q244 40 217 45"/><path d="M282 41 Q309 86 337 42 Q309 38 282 41"/><path d="M348 43 Q377 88 405 42 Q376 39 348 43"/><path d="M414 42 Q443 85 470 41 Q441 38 414 42"/><path d="M480 43 Q510 83 538 39 Q509 37 480 43"/></g>
+					<path class="arch" d="M24 16 C 128 72, 218 74, 330 18 S 538 72, 636 18"/>
+					<path class="leaf" d="M58 22 C 18 52, 24 81, 56 95 C 89 82, 99 59, 100 38 C 90 24, 74 18, 58 22 Z"/>
+					<path class="leaf" d="M110 16 C 72 52, 82 84, 116 96 C 150 82, 162 58, 161 34 C 148 25, 132 18, 110 16 Z"/>
+					<path class="leaf" d="M164 16 C 126 58, 140 86, 176 98 C 210 84, 223 58, 220 32 C 210 22, 193 18, 164 16 Z"/>
+					<path class="leaf" d="M222 18 C 188 58, 202 87, 238 98 C 270 86, 283 60, 281 35 C 268 25, 249 20, 222 18 Z"/>
+					<path class="leaf" d="M278 18 C 246 57, 260 87, 295 98 C 327 85, 340 59, 339 35 C 327 24, 308 20, 278 18 Z"/>
+					<path class="leaf" d="M335 19 C 302 58, 317 88, 352 98 C 386 84, 398 58, 396 34 C 385 24, 365 19, 335 19 Z"/>
+					<path class="leaf" d="M394 17 C 362 57, 376 88, 412 99 C 447 85, 460 59, 457 33 C 445 22, 423 18, 394 17 Z"/>
+					<path class="leaf" d="M454 18 C 420 56, 434 87, 470 97 C 503 85, 516 58, 514 33 C 501 22, 482 19, 454 18 Z"/>
+					<path class="leaf" d="M512 20 C 478 57, 490 84, 526 96 C 560 84, 573 58, 570 35 C 557 25, 538 20, 512 20 Z"/>
+					<path class="leaf small" d="M567 28 C 536 57, 545 80, 576 90 C 603 79, 612 58, 607 40 C 597 33, 584 29, 567 28 Z"/>
+					<path class="vein" d="M58 50 C 66 62, 73 72, 74 89"/>
+					<path class="vein" d="M111 48 C 119 61, 127 71, 129 88"/>
+					<path class="vein" d="M165 49 C 174 62, 182 72, 183 89"/>
+					<path class="vein" d="M223 50 C 232 63, 239 73, 241 89"/>
+					<path class="vein" d="M280 50 C 289 62, 295 73, 298 89"/>
+					<path class="vein" d="M337 50 C 347 62, 352 74, 355 90"/>
+					<path class="vein" d="M397 50 C 406 62, 412 74, 415 90"/>
+					<path class="vein" d="M452 49 C 461 62, 468 72, 471 89"/>
+					<path class="vein" d="M511 50 C 520 62, 527 73, 532 89"/>
+					<path class="vein" d="M570 54 C 576 63, 580 72, 581 84"/>
+					<circle class="bud" cx="330" cy="20" r="6"/>
+					<circle class="bud" cx="206" cy="22" r="5"/>
+					<circle class="bud" cx="454" cy="22" r="5"/>
 				</g>
 			</svg>
-			<p class="eyebrow">|| ஸ்ரீ ஊத்துக்காடு எல்லையம்மன் கோயில் ||</p>
-			<!-- <img class="om-symbol" src="./Ganesha_img.jpg" alt="Ganesha image" /> -->
+			<p class="eyebrow">|| ஸ்ரீ ஊத்துக்காடு எல்லம்மன் துணை ||</p>
+			<img class="om-symbol" src="./Ganesha_sample-removebg.png" alt="Ganesha image" />
 			<p class="eyebrow"></p>
             <br><br>
 			<div class="title-wrap">
@@ -177,9 +227,9 @@
 			occasion: "Griha Pravesham",
 			titleLine: "GRIHA PRAVESHAM",
 			invitationMessage: `
-                With the blessings of the Almighty,
-                We are delighted to invite you to the <b><i>Griha Pravesham</i></b> of our new home. 
-                Your gracious presence and blessings will make this occasion truly memorable.
+                <i>With the blessings of the Almighty,</i>
+                <i>We are delighted to invite you to the</i> <b>Griha Pravesham</b> <i>of our new home. 
+                Your gracious presence and blessings will make this occasion truly memorable.</i>
             `,
 			closingMessage: "With warm regards",
 			address: "S2, Ganga Enclave, Kambar Street, Gandhi Nagar, Vadapalani - 600093.",
