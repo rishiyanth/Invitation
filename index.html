@@ -10,17 +10,21 @@
 	<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@600;700;900&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
 	<style>
 		:root {
-			--maroon: #210b2e;
-			--maroon-soft: #361139;
-			--rani: #d92368;
-			--orange: #f48c28;
-			--teal: #0f958f;
+			--maroon: #1d1217;
+			--maroon-soft: #2c1f24;
+			--rani: #c13a49;
+			--orange: #d98a36;
+			--teal: #0d8d85;
 			--blue: #234fa2;
-			--emerald: #168257;
-			--gold: #f8ca61;
-			--gold-light: #fff0ad;
-			--ink: #fff7da;
-			--muted: #e5cba9;
+			--emerald: #2e7d4a;
+			--gold: #d7a85e;
+			--gold-light: #f4d68c;
+			--leaf-deep: #163b2c;
+			--leaf-mid: #2d6d41;
+			--leaf-soft: #7aa96b;
+			--leaf-light: #dfeeb8;
+			--ink: #fff8ea;
+			--muted: #f0dcc4;
 			--shadow: rgba(8, 2, 14, .46);
 		}
 
@@ -31,7 +35,7 @@
 			min-width: 320px;
 			overflow-x: hidden;
 			color: var(--ink);
-			background: var(--maroon);
+			background: linear-gradient(135deg, #152f24 0%, #183d2e 18%, #2d2617 50%, #1d1217 100%);
 			font-family: "DM Sans", sans-serif;
 		}
 		button, a { font: inherit; }
@@ -43,22 +47,27 @@
 			position: fixed;
 			z-index: -2;
 			inset: 0;
-			background: radial-gradient(circle at 50% 12%, #672042 0, transparent 34%), linear-gradient(145deg, #210b2e 15%, #3e102f 54%, #101e42 100%);
+			background: radial-gradient(circle at 50% 12%, rgba(125, 168, 96, 0.6) 0, transparent 30%), linear-gradient(145deg, #122a1d 10%, #214d35 36%, #2a2114 72%, #140d11 100%);
 		}
 		.page::after {
 			content: "";
 			position: fixed;
 			z-index: -1;
 			inset: 0;
-			opacity: .14;
-			background-image: radial-gradient(var(--gold) .7px, transparent .7px);
-			background-size: 19px 19px;
+			opacity: .12;
+			background-image: radial-gradient(var(--gold-light) 1px, transparent 1px);
+			background-size: 18px 18px;
 			pointer-events: none;
 		}
 		.hero { position: relative; min-height: auto; padding: 12px 16px 28px; display: flex; flex-direction: column; align-items: center; text-align: center; }
-		.toran { width: min(100%, 620px); height: 75px; overflow: visible; }
-		.toran path { fill: var(--orange); stroke: var(--gold); stroke-width: 1.5; }
-		.toran .bead { fill: var(--teal); stroke: var(--gold); }
+		.toran { width: min(100%, 760px); height: 142px; overflow: visible; filter: drop-shadow(0 8px 12px rgba(0,0,0,.28)); }
+		.toran .cord { fill: none; stroke: #f4d68c; stroke-width: 3; stroke-linecap: round; }
+		.toran .cord-inner { fill: none; stroke: #b77a32; stroke-width: 1.2; stroke-linecap: round; }
+		.toran .leaf { fill: #579052; stroke: #d9c477; stroke-width: 1; }
+		.toran .leaf-vein { fill: none; stroke: #fff0b1; stroke-width: 1; stroke-linecap: round; }
+		.toran .flower-petal { fill: #f28a19; stroke: #ffd26b; stroke-width: .8; }
+		.toran .flower-center { fill: #7e292c; stroke: #ffe39a; stroke-width: 1; }
+		.toran .pearl { fill: #fff0c2; stroke: #c98a3b; stroke-width: .8; }
 		.toran-group { transform-origin: center top; animation: sway 4s ease-in-out infinite; }
 		.om-symbol {
 			display: block;
@@ -128,14 +137,21 @@
 	<div id="sparkles" aria-hidden="true"></div>
 	<main class="page">
 		<section class="hero" aria-labelledby="titleLine">
-			<svg class="toran" viewBox="0 0 600 100" role="img" aria-label="Marigold toran decoration">
+			<svg class="toran" viewBox="0 0 660 145" role="img" aria-label="Traditional Indian toran with mango leaves, marigolds, and pearl accents">
+				<defs>
+					<g id="toranLeaf"><path fill="#579052" stroke="#d9c477" stroke-width="1" d="M0 0 C-15 9 -16 26 0 38 C16 26 15 9 0 0Z"/><path fill="none" stroke="#fff0b1" stroke-width="1" stroke-linecap="round" d="M0 5v28M0 19l-7-7M0 24l7-8"/></g>
+					<g id="marigold"><circle fill="#f28a19" stroke="#ffd26b" stroke-width=".8" r="8"/><path fill="#f28a19" stroke="#ffd26b" stroke-width=".8" d="M0-14Q5-9 0-5Q-5-9 0-14ZM14 0Q9 5 5 0Q9-5 14 0ZM0 14Q-5 9 0 5Q5 9 0 14ZM-14 0Q-9-5-5 0Q-9 5-14 0ZM10-10Q11-3 4-4Q3-11 10-10ZM10 10Q3 11 4 4Q11 3 10 10ZM-10 10Q-11 3-4 4Q-3 11-10 10ZM-10-10Q-3-11-4-4Q-11-3-10-10Z"/><circle fill="#7e292c" stroke="#ffe39a" stroke-width="1" r="3.5"/></g>
+				</defs>
 				<g class="toran-group">
-					<path d="M5 7 Q100 45 185 10 T365 10 T595 7" fill="none" stroke="#f8ca61" stroke-width="3"/>
-					<path d="M34 17 Q50 52 65 18 Q82 55 98 27 Q115 59 131 27 Q150 59 168 21 Q184 58 200 18 Q218 61 236 21 Q254 59 272 18 Q290 60 308 20 Q327 57 345 18 Q364 59 382 18 Q399 58 418 25 Q436 59 453 20 Q470 56 488 20 Q507 58 524 24 Q542 54 558 17" fill="none" stroke="#f8ca61" stroke-width="3"/>
-					<g class="bead"><circle cx="52" cy="27" r="8"/><circle cx="116" cy="35" r="8"/><circle cx="181" cy="28" r="8"/><circle cx="246" cy="34" r="8"/><circle cx="311" cy="29" r="8"/><circle cx="377" cy="32" r="8"/><circle cx="442" cy="28" r="8"/><circle cx="508" cy="31" r="8"/><circle cx="558" cy="25" r="8"/></g>
-					<g><path d="M31 41 Q51 80 70 40 Q50 38 31 41"/><path d="M92 47 Q114 88 135 47 Q113 44 92 47"/><path d="M151 41 Q180 82 206 40 Q178 37 151 41"/><path d="M217 45 Q245 88 272 43 Q244 40 217 45"/><path d="M282 41 Q309 86 337 42 Q309 38 282 41"/><path d="M348 43 Q377 88 405 42 Q376 39 348 43"/><path d="M414 42 Q443 85 470 41 Q441 38 414 42"/><path d="M480 43 Q510 83 538 39 Q509 37 480 43"/></g>
+					<path class="cord" d="M18 13 Q330 79 642 13"/><path class="cord-inner" d="M18 17 Q330 83 642 17"/>
+					<g opacity=".98">
+						<use href="#toranLeaf" transform="translate(35 20) rotate(-48) scale(.72)"/><use href="#toranLeaf" transform="translate(58 28) rotate(-34) scale(.8)"/><use href="#toranLeaf" transform="translate(84 34) rotate(-28)"/><use href="#toranLeaf" transform="translate(112 41) rotate(-25)"/><use href="#toranLeaf" transform="translate(141 47) rotate(-20)"/><use href="#toranLeaf" transform="translate(171 53) rotate(-17)"/><use href="#toranLeaf" transform="translate(201 58) rotate(-14)"/><use href="#toranLeaf" transform="translate(231 63) rotate(-10)"/><use href="#toranLeaf" transform="translate(261 67) rotate(-7)"/><use href="#toranLeaf" transform="translate(291 70) rotate(-4)"/><use href="#toranLeaf" transform="translate(321 72)"/><use href="#toranLeaf" transform="translate(351 70) rotate(4)"/><use href="#toranLeaf" transform="translate(381 67) rotate(7)"/><use href="#toranLeaf" transform="translate(411 63) rotate(10)"/><use href="#toranLeaf" transform="translate(441 58) rotate(14)"/><use href="#toranLeaf" transform="translate(471 53) rotate(17)"/><use href="#toranLeaf" transform="translate(501 47) rotate(20)"/><use href="#toranLeaf" transform="translate(530 41) rotate(25)"/><use href="#toranLeaf" transform="translate(558 34) rotate(28)"/><use href="#toranLeaf" transform="translate(584 28) rotate(34) scale(.8)"/><use href="#toranLeaf" transform="translate(607 20) rotate(48) scale(.72)"/>
+					</g>
+					<g><use href="#marigold" transform="translate(76 40) scale(.72)"/><use href="#marigold" transform="translate(150 56) scale(.7)"/><use href="#marigold" transform="translate(220 68) scale(.68)"/><use href="#marigold" transform="translate(330 82) scale(.9)"/><use href="#marigold" transform="translate(440 68) scale(.68)"/><use href="#marigold" transform="translate(510 56) scale(.7)"/><use href="#marigold" transform="translate(584 40) scale(.72)"/></g>
+					<g><circle class="pearl" cx="112" cy="52" r="2.4"/><circle class="pearl" cx="185" cy="68" r="2.4"/><circle class="pearl" cx="264" cy="78" r="2.4"/><circle class="pearl" cx="396" cy="78" r="2.4"/><circle class="pearl" cx="475" cy="68" r="2.4"/><circle class="pearl" cx="548" cy="52" r="2.4"/></g>
 				</g>
 			</svg>
+			<p class="eyebrow">|| ஸ்ரீ ஊத்துக்காடு எல்லம்மன் துணை ||</p>
 			<img class="om-symbol" src="./Ganesha_sample-removebg.png" alt="Ganesha image" />
 			<p class="eyebrow"></p>
             <br><br>
@@ -176,13 +192,13 @@
 			occasion: "Griha Pravesham",
 			titleLine: "GRIHA PRAVESHAM",
 			invitationMessage: `
-                With the blessings of the Almighty,
-                We are delighted to invite you to the <b><i>Griha Pravesham</i></b> of our new home. 
-                Your gracious presence and blessings will make this occasion truly memorable.
+                <i>With the blessings of the Almighty,</i>
+                <i>We are delighted to invite you to the</i> <b>Griha Pravesham</b> <i>of our new home. 
+                Your gracious presence and blessings will make this occasion truly memorable.</i>
             `,
 			closingMessage: "With warm regards",
 			address: "S2, Ganga Enclave, Kambar Street, Gandhi Nagar, Vadapalani - 600093.",
-			contact: "+91 866722012 / +91 9444433415",
+			contact: "+91 866722012",
 			date: "2026-11-20",
 			dateLabel: "Friday, 20 November 2026",
 			time: "4:00 AM onwards",
